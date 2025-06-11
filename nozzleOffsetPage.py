@@ -42,7 +42,7 @@ class NozzleOffsetPage(QWidget):
         if self.nozzleOffsetBackButton:
             self.nozzleOffsetBackButton.clicked.connect(self._return_to_main_calibration)
         if self.nozzleOffsetSetButton:
-            self.nozzleOffsetSetButton.clicked.connect(self.setZProbeOffset)
+            self.nozzleOffsetSetButton.clicked.connect(lambda: self.setZProbeOffset(self.nozzleOffsetDoubleSpinBox.value())))
 
         # Initialize the current nozzle offset display
         if self.currentNozzleOffsetLabel:
