@@ -71,11 +71,11 @@ class ToolOffset(QWidget):
         if self.toolOffsetZBackButton:
             self.toolOffsetZBackButton.clicked.connect(self._return_to_main_calibration)
         if self.toolOffsetXSetButton:
-            self.toolOffsetXSetButton.clicked.connect(self._set_tool_offset_x)
+            self.toolOffsetXSetButton.clicked.connect(self.setToolOffsetX)
         if self.toolOffsetYSetButton:
-            self.toolOffsetYSetButton.clicked.connect(self._set_tool_offset_y)
+            self.toolOffsetYSetButton.clicked.connect(self.setToolOffsetY)
         if self.toolOffsetZSetButton:
-            self.toolOffsetZSetButton.clicked.connect(self._set_tool_offset_z)
+            self.toolOffsetZSetButton.clicked.connect(self.setToolOffsetY)
 
     def _return_to_main_calibration(self):
         """Return to the main calibration page"""
@@ -90,45 +90,6 @@ class ToolOffset(QWidget):
                 self.logger.error("Cannot return to main calibration - required widgets not found")
         else:
             self.logger.error("Cannot return to main calibration - main_window.calibrate_screen not found")
-
-    def _set_tool_offset_x(self):
-        """Set the X offset for the tool."""
-        if self.toolOffsetXDoubleSpinBox:
-            x_offset = self.toolOffsetXDoubleSpinBox.value()
-            self.logger.info(f"Tool X Offset set to: {x_offset} mm")
-        else:
-            self.logger.error("Cannot set X offset - spin box not found")
-
-    def _set_tool_offset_y(self):
-        """Set the Y offset for the tool."""
-        if self.toolOffsetYDoubleSpinBox:
-            y_offset = self.toolOffsetYDoubleSpinBox.value()
-            self.logger.info(f"Tool Y Offset set to: {y_offset} mm")
-        else:
-            self.logger.error("Cannot set Y offset - spin box not found")
-
-    def _set_tool_offset_z(self):
-        """Set the Z offset for the tool."""
-        if self.toolOffsetZDoubleSpinBox:
-            z_offset = self.toolOffsetZDoubleSpinBox.value()
-            self.logger.info(f"Tool Z Offset set to: {z_offset} mm")
-        else:
-            self.logger.error("Cannot set Z offset - spin box not found")
-
-
-
-    def handleButtonClickX(self):
-        """Handles button click event to set X-axis tool offset."""
-        try:
-            if self.toolOffsetXDoubleSpinBox:
-                x_offset = self.toolOffsetXDoubleSpinBox.value()
-                self.setToolOffsetX(x_offset)
-            else:
-                self.logger.error("Cannot set X offset - spin box not found")
-                dialog.WarningOk(self, "Error: Tool offset X spin box not initialized.", overlay=True)
-        except Exception as e:
-            self.logger.error(f"Unexpected error in handleButtonClickX: {e}")
-            dialog.WarningOk(self, f"Unexpected error: {e}", overlay=True)
 
     def setToolOffsetX(self, x_offset):
         """Sets X offset for the tool and sends G-code commands to the 3D printer."""
@@ -150,20 +111,6 @@ class ToolOffset(QWidget):
             self.logger.error(f"Error in setToolOffsetX: {e}")
             dialog.WarningOk(self, f"Error in setToolOffsetX: {e}", overlay=True)
 
-
-    def handleButtonClickY(self):
-        """Handles button click event to set Y-axis tool offset."""
-        try:
-            if self.toolOffsetYDoubleSpinBox:
-                y_offset = self.toolOffsetYDoubleSpinBox.value()
-                self.setToolOffsetY(y_offset)
-            else:
-                self.logger.error("Cannot set Y offset - spin box not found")
-                dialog.WarningOk(self, "Error: Tool offset Y spin box not initialized.", overlay=True)
-        except Exception as e:
-            self.logger.error(f"Unexpected error in handleButtonClickY: {e}")
-            dialog.WarningOk(self, f"Unexpected error: {e}", overlay=True)
-
     def setToolOffsetY(self, y_offset):
         """Sets Y offset for the tool and sends G-code commands to the 3D printer."""
         try:
@@ -183,21 +130,8 @@ class ToolOffset(QWidget):
         except Exception as e:
             self.logger.error(f"Error in setToolOffsetY: {e}")
             dialog.WarningOk(self, f"Error in setToolOffsetY: {e}", overlay=True)
+
     
-
-    def handleButtonClickZ(self):
-        """Handles button click event to set Z-axis tool offset."""
-        try:
-            if self.toolOffsetZDoubleSpinBox:
-                z_offset = self.toolOffsetZDoubleSpinBox.value()
-                self.setToolOffsetZ(z_offset)
-            else:
-                self.logger.error("Cannot set Z offset - spin box not found")
-                dialog.WarningOk(self, "Error: Tool offset Z spin box not initialized.", overlay=True)
-        except Exception as e:
-            self.logger.error(f"Unexpected error in handleButtonClickZ: {e}")
-            dialog.WarningOk(self, f"Unexpected error: {e}", overlay=True)
-
     def setToolOffsetZ(self, z_offset):
         """Sets Z offset for the tool and sends G-code commands to the 3D printer."""
         try:
@@ -217,4 +151,19 @@ class ToolOffset(QWidget):
         except Exception as e:
             self.logger.error(f"Error in setToolOffsetZ: {e}")
             dialog.WarningOk(self, f"Error in setToolOffsetZ: {e}", overlay=True)
+
+
+   
+
+    
+
+
+    
+
+    
+    
+
+    
+
+    
 
