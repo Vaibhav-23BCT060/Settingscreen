@@ -42,7 +42,7 @@ class NozzleOffsetPage(QWidget):
         if self.nozzleOffsetBackButton:
             self.nozzleOffsetBackButton.clicked.connect(self._return_to_main_calibration)
         if self.nozzleOffsetSetButton:
-            self.nozzleOffsetSetButton.clicked.connect(self._set_nozzle_offset)
+            self.nozzleOffsetSetButton.clicked.connect(self.setZProbeOffset)
 
         # Initialize the current nozzle offset display
         if self.currentNozzleOffsetLabel:
@@ -93,31 +93,6 @@ class NozzleOffsetPage(QWidget):
             self.logger.debug("Spinbox configured with custom styling")
         else:
             self.logger.warning("Cannot configure spinbox - invalid reference")
-
-    
-
-
-   
-    def handleButtonClick(self):
-    
-        if self.nozzleOffsetDoubleSpinBox:
-            offset = self.nozzleOffsetDoubleSpinBox.value()
-            self.setZProbeOffset(offset)
-        else:
-            self.logger.error("Nozzle offset spin box not found!")
-
-    def handleButtonClick(self):
-        """Handles button click event to set Z Probe offset."""
-        try:
-            if self.nozzleOffsetDoubleSpinBox:
-                offset = self.nozzleOffsetDoubleSpinBox.value()
-                self.setZProbeOffset(offset)
-            else:
-                self.logger.error("Nozzle offset spin box not found!")
-                dialog.WarningOk(self, "Error: Nozzle offset spin box not initialized.", overlay=True)
-        except Exception as e:
-            self.logger.error(f"Unexpected error in handleButtonClick: {e}")
-            dialog.WarningOk(self, f"Unexpected error: {e}", overlay=True)
 
     def setZProbeOffset(self, offset):
         """Sets Z Probe offset from spinbox and updates UI accordingly."""
